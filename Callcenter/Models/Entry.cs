@@ -15,7 +15,8 @@ namespace Callcenter.Models
 
         [BsonId]
         public ObjectId id { get; set; }
-        public DateTime timestamp { get; set; }
+        [BsonSerializer(typeof(TimeKapselConverter))]
+        public TimeKapsel timestamp { get; set; }
         public DateTime? modifyts { get; set; }
         public DateTime? finishts { get; set; }
         public bool IsDeleted => finishts.HasValue;
@@ -23,7 +24,7 @@ namespace Callcenter.Models
         public string zip { get; set; }
         public EntryRequest request { get; set; }
         public bool marked { get; set; }
-        public object __v { get; set; }
+        public object __v { get; set; } = "1";
         public string CString => marked ? "other" : string.Empty;
         public EntryFill TrasportModel => new EntryFill()
         {
